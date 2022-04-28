@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}글 상세{% endblock %}
+
+{% block content %}
+<h1>Post 상세 화면</h1>
+{% include 'mixin/post_card.html' with detail=True %}
+<!-- post_card와 연결되는 부분
+detail을 True 설정하고 post_card에서는 if not detail로 작성해서
+detail에서는 더보기를 없애고 아니면 더보기를 보여준다. -->
+{% endblock %}
+

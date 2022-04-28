@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}홈{% endblock %}
+
+{% block content %}
+<main>
+    <div class="card-list">
+        {% for post in post_list %}
+            {% include 'mixin/post_card.html' with detail=False %}
+            <!-- post_detail.html에서 detail=True를 줬기 때문에
+            여기서는 detail=False로 줘야 좀 더 깔끔한 코드가 된다. -->
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
