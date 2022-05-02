@@ -6,6 +6,9 @@
 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <div>
         {{ form.as_p }}
+        <!-- 템플릿 태그의 주석과 html 자체 주석처리와 다른점!! -->
+        <!-- html자체 주석처리는 지금 이 주석처리이고, 웹페이지에서 검사를 하면 태그가 보이긴한다! -->
+        {# 하지만 템플릿태그로 주석처리를 하면 검사에서도 보이지 않게 된다!  요거 되게 신기하넹#}
     </div>
     <div>
         <input type="submit" value="제출">

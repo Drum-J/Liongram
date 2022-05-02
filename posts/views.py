@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic.list import ListView
 from .models import Post
 from django.contrib.auth.decorators import login_required
-from .forms import PostBaseForm
+from .forms import PostBaseForm,PostCreateForm,PostDetailForm
 # Create your views here.
 def index(request) :
     post_list = Post.objects.all().order_by('-created_at')
@@ -26,12 +26,14 @@ def post_list_view(request) :
     return render(request, 'posts/post_list.html',context)
 
 def post_detail_view(request, id) :
+
     try :
         post = Post.objects.get(id=id) # 하나만 불러올거기 때문에 get 으로 불러온다.
     except Post.DoesNotExist:
         return redirect('index') # 주소에 id값을 다른걸 입력하게 되면 index로 넘어간다. - 에러가 나지 않게 하는 것
     context = {
-        'post' : post
+        'post' : post,
+        'form' : PostDetailForm,
     }
     return render(request, 'posts/post_detail.html', context)
 
@@ -53,11 +55,11 @@ def post_create_view(request) :
 
 def post_create_form_view(request) :
     if request.method == "GET" :
-        form = PostBaseForm()
+        form = PostCreateForm()
         context = {'form' : form}
         return render(request, 'posts/post_form2.html', context)
     else :
-        form = PostBaseForm(request.POST, request.FILES)
+        form = PostCreateForm(request.POST, request.FILES)
         
         if form.is_valid():
             Post.objects.create(
