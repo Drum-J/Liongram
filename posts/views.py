@@ -8,6 +8,7 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic.list import ListView
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from .forms import PostBaseForm
 # Create your views here.
 def index(request) :
     post_list = Post.objects.all().order_by('-created_at')
@@ -49,6 +50,24 @@ def post_create_view(request) :
             writer=request.user,
         )
         return redirect('index')   
+
+def post_create_form_view(request) :
+    if request.method == "GET" :
+        form = PostBaseForm()
+        context = {'form' : form}
+        return render(request, 'posts/post_form2.html', context)
+    else :
+        form = PostBaseForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            Post.objects.create(
+            iamge=form.cleaned_data['iamge'],
+            content=form.cleaned_data['content'],
+            writer=request.user,
+        )
+        else :
+            return redirect('posts:post-create')        
+        return redirect('index')  
 
 @login_required
 def post_update_view(request, id) : #create랑 detail이랑 합쳐졌다고 생각하면 된다. 그래서 POST랑 GET 둘 다 필요하다.
