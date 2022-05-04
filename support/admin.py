@@ -1,5 +1,7 @@
+import imp
 from django.contrib import admin
 from .models import FAQ,Inquiry,Answer
+from users.models import User
 # Register your models here.
 class AnswerInline(admin.TabularInline):
     model = Answer
@@ -20,9 +22,9 @@ class FAQModelAdmin(admin.ModelAdmin) :
 
 @admin.register(Inquiry)
 class InquiryModelAdmin(admin.ModelAdmin) :
-    list_display = ('title','category','created_at','writer') 
+    list_display = ('title','category','created_at','writer','status') 
     search_fields = ('title','email','phone') 
     search_help_text = '제목,이메일,전화번호 검색이 가능합니다!' 
-    list_filter = ('category',)
+    list_filter = ('category','status')
 
     inlines = [AnswerInline]
