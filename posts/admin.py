@@ -16,7 +16,7 @@ class CommentInline(admin.TabularInline) :
 
 @admin.register(Post)
 class PostModelAdmin(admin.ModelAdmin) :
-    list_display = ('id','iamge','content','created_at','view_count','writer')
+    list_display = ('id','image','content','created_at','view_count','writer')
     # list_editable = ('content',)
     list_filter = ('created_at',)
     search_fields = ('id','writer__username' )

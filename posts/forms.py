@@ -23,7 +23,7 @@ class PostBaseForm(forms.ModelForm):
 from django.core.exceptions import ValidationError
 class PostCreateForm(PostBaseForm):
     class Meta(PostBaseForm.Meta):
-        fields = ['iamge','content']
+        fields = ['image','content']
     
     def clean_content(self):
         data = self.cleaned_data['content']
@@ -33,7 +33,7 @@ class PostCreateForm(PostBaseForm):
 
 class PostUpdateForm(PostBaseForm):
     class Meta(PostBaseForm.Meta):
-        fields = ['iamge','content']
+        fields = ['image','content']
 
 class PostDetailForm(PostBaseForm):
     def __init__(self,*args,**kwargs):

@@ -47,7 +47,7 @@ def post_create_view(request) :
         print(image)
         print(content)
         Post.objects.create(
-            iamge=image,
+            image=image,
             content=content,
             writer=request.user,
         )
@@ -63,7 +63,7 @@ def post_create_form_view(request) :
         
         if form.is_valid():
             Post.objects.create(
-            iamge=form.cleaned_data['iamge'],
+            image=form.cleaned_data['image'],
             content=form.cleaned_data['content'],
             writer=request.user,
         )
@@ -86,8 +86,8 @@ def post_update_view(request, id) : #create랑 detail이랑 합쳐졌다고 생�
         print(new_image)
         print(content)
         if new_image :
-            post.iamge.delete()
-            post.iamge = new_image
+            post.image.delete()
+            post.image = new_image
         
         post.contene = content
         post. save()
